@@ -1,0 +1,6 @@
+---
+# defaults file for aws-elastic-ip
+eip_in_vpc: no
+eip_allow_reassociation: no
+eip_reuse_existing_ip_allowed: no
+eip_release_on_disassociation: no

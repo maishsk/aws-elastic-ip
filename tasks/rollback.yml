@@ -1,0 +1,6 @@
+---
+- name: Disassociate Elastic IP 
+  ec2_eip:
+    region: "{{ region }}"
+    state: absent
+    ip: "{{ public_ip }}"

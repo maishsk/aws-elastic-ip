@@ -1,0 +1,17 @@
+---
+- name: Allocate a new elastic IP without associating it to a specific instance/ENI
+  ec2_eip:
+    region: "{{ region }}"
+    state: present
+    reuse_existing_ip_allowed: "{{ eip_reuse_existing_ip_allowed }}"
+    release_on_disassociation: "{{ eip_release_on_disassociation }}"
+    in_vpc: "{{ eip_in_vpc }}"
+    allow_reassociation: "{{ eip_allow_reassociation }}"
+    device_id: "{{ eip_device_id | default (omit) }}"
+    private_ip_address: "{{ eip_private_ip_address | default (omit) }}"
+    public_ip: "{{ eip_public_ip | default (omit) }}"
+  register: eip
+
+- name: Set fact for further use
+  set_fact: 
+    elastic_ip: "{{ eip }}"
