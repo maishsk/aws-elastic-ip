@@ -49,8 +49,20 @@ Create a `main.yaml` file with the following contents:
   gather_facts: false
   vars_files:
     - vars/vars.yml
-  roles:
-    - aws-elastic-ip
+  tasks:
+  - name: Create Process
+    include_role:
+      name: "{{ item }}"
+    with_items:
+      - aws-elastic-ip
+    tags: [ 'never', 'create' ]
+
+  - name: Rollback Process
+    include_role:
+      name: "{{ item }}"
+    with_items:
+      - aws-elastic-ip
+    tags: [ 'never', 'rollback' ]
 ```
 Create a `vars/vars.yml` with the content similar to:
 
